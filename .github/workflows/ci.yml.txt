@@ -1,0 +1,32 @@
+name: CI
+on:
+ push:
+   branches: [ main ]
+jobs:
+ build:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout código
+       uses: actions/checkout@v3
+     # 🔹 BACKEND (.NET)
+     - name: Setup .NET
+       uses: actions/setup-dotnet@v3
+       with:
+         dotnet-version: 8.0.x
+     - name: Restore backend
+       run: dotnet restore ./BackNet/Approval.Api
+     - name: Build backend
+       run: dotnet build ./BackNet/Approval.Api --no-restore
+     # 🔹 FRONTEND (Angular)
+     - name: Setup Node
+       uses: actions/setup-node@v3
+       with:
+         node-version: 18
+     - name: Install frontend
+       run: |
+         cd FrontAngular/approval-app
+         npm install
+     - name: Build frontend
+       run: |
+         cd FrontAngular/approval-app
+         npm run build
