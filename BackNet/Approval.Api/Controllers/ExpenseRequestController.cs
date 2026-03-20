@@ -21,7 +21,8 @@ public class ExpenseRequestController : ControllerBase
     {
         var query = _context.ExpenseRequest.AsQueryable();
 
-
+        if (!string.IsNullOrWhiteSpace(status))
+            query = query.Where(x => x.Status == status);
         if (!string.IsNullOrWhiteSpace(category))
             query = query.Where(x => x.Category == category);
         if (startDate.HasValue)
@@ -32,6 +33,14 @@ public class ExpenseRequestController : ControllerBase
         var result = await query.ToListAsync();
        
         return Ok(result);
+    }
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ExpenseRequest>> GetById(int id)
+    {
+        var expense = await _context.ExpenseRequest.FindAsync(id);
+        if (expense == null)
+            return NotFound();
+        return Ok(expense);
     }
 
     [HttpPost]

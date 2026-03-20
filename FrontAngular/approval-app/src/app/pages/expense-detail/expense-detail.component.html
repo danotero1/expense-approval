@@ -1,0 +1,17 @@
+
+<div class="container mt-4">
+    <div class="card shadow-sm mb-2 p-3">
+        <h2>Detalle de Solicitud</h2>
+        <div *ngIf="loading">Cargando...</div>
+        <div *ngIf="expense">
+            <p><strong>ID:</strong> {{ expense.id }}</p>
+            <p><strong>Categoría:</strong> {{ expense.category }}</p>
+            <p><strong>Descripción:</strong> {{ expense.description }}</p>
+            <p><strong>Valor:</strong> {{ expense.amount   | currency:'COP':'symbol':'1.0-0' }}</p>
+            <p><strong>Fecha:</strong> {{ expense.expensDate | date }}</p>
+            <p><strong>Solicitante:</strong> {{ expense.requestBy }}</p>
+            <p><strong>Estado:</strong> {{ expense.status }}</p>
+        </div>
+        <button class="btn btn-secondary" routerLink="/">Volver</button>
+    </div>
+</div>

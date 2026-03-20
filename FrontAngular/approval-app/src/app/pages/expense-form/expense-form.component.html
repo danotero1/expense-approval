@@ -1,0 +1,46 @@
+
+<div class="container mt-4">
+    <div class="card shadow-sm mb-2 p-3">
+        <h3 class="mb-4">{{ isEdit ? 'Editar' : 'Crear' }} Solicitud</h3>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="mb-3">
+                <label>Categoría</label>
+                <input type="text"  class="form-control" formControlName="category" [ngClass]="{'is-invalid': form.get('category')?.touched && form.get('category')?.invalid}" />
+                <div  class="invalid-feedback">
+                    La categoría es obligatoria
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Descripción</label>
+                <input class="form-control" formControlName="description" />
+            </div>
+            <div class="mb-3">
+                <label>Valor</label>
+                <input class="form-control" type="number" formControlName="amount"  [ngClass]="{'is-invalid': form.get('amount')?.touched && form.get('amount')?.invalid}"/>
+                <div  class="invalid-feedback">
+                    <p class="text-danger">Debe ser mayor a 0</p>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Fecha</label>
+                <input class="form-control" type="date" formControlName="expensDate" />
+                  <div  class="invalid-feedback">
+                    <p class="text-danger">La fecha es obligatoria</p>
+                </div>
+            </div>
+            <div class="mb-3"> 
+                <label>Solicitante</label>
+                <input class="form-control" formControlName="requestBy" [ngClass]="{'is-invalid': form.get('requestBy')?.touched && form.get('requestBy')?.invalid}" />
+                 <div  class="invalid-feedback">
+                    <p class="text-danger">El solicitante es obligatorio</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mt-4 gap-2">
+                <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Guardar</button>
+                <button class="btn btn-secondary" routerLink="/">Volver</button>
+
+            </div>
+        </form>
+
+    </div>
+</div>
