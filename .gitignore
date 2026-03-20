@@ -1,0 +1,17 @@
+# .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.log
+*.db
+# SQLite (opcional)
+*.db
+# Node
+node_modules/
+dist/
+# VSCode
+.vscode/
+# OS
+.DS_Store
